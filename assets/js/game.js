@@ -143,7 +143,9 @@ function update(time, delta) {
     const escapeKey = this.input.keyboard.addKey('ESC');
 
     EnigmaPlayers = EnigmaPlayers.map((player, i) => {
-        const isBound = player.sprite.x + 71 >= this.sys.canvas.width || player.sprite.x <= 0;
+        const isBoundRight = player.sprite.x + 71 >= this.sys.canvas.width;
+        const isBoundLeft = player.sprite.x <= 0;
+
         const rightKey = this.input.keyboard.addKey(player.keyDirection.right);
         const leftKey = this.input.keyboard.addKey(player.keyDirection.left);
 
@@ -153,18 +155,18 @@ function update(time, delta) {
                 player.sprite.x = 50;
                 player.velocityX =  Phaser.Math.FloatBetween(1, 2);
                 break;
-            case isBound:
+            case isBoundRight:
                 if (!rank.includes(i)) {
                     rank.push(i);
                 }
 
                 player.sprite.anims.stop();
                 break;
-            case this.input.keyboard.checkDown(rightKey, 1):
+            case this.input.keyboard.checkDown(rightKey, 1) && !isBoundRight:
                 player.sprite.anims.play(player.direction.right, true);
                 player.sprite.x += player.velocityX;
                 break;
-            case this.input.keyboard.checkDown(leftKey, 1):
+            case this.input.keyboard.checkDown(leftKey, 1) && !isBoundLeft:
                 player.sprite.anims.play(player.direction.left, true);
                 player.sprite.x -= player.velocityX;
                 break;
