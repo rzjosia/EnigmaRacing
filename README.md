@@ -2,6 +2,8 @@
 
 A small game made by `Phaser.js`
 
+[Production](https://virtual-plating-309512.web.app/)
+
 Requirements :
  - Web Server : [more information](https://phaser.io/tutorials/getting-started-phaser3/part2)
 
